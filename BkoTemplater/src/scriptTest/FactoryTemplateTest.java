@@ -1,4 +1,4 @@
-package scriptTest.copy;
+package scriptTest;
 
 import static org.junit.Assert.assertEquals;
 

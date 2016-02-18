@@ -1,4 +1,4 @@
-package scriptTest.copy;
+package scriptTest;
 
 public class TemplateScript implements Template {
 	String template;

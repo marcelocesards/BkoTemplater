@@ -1,4 +1,4 @@
-package scriptTest.copy;
+package scriptTest;
 
 public interface Template {
 
