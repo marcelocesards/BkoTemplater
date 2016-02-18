@@ -1,6 +1,6 @@
 package script;
 
-import scriptTest.copy.TemplateScript;
+import scriptTest.TemplateScript;
 
 public class FactoryTemplate {
 
