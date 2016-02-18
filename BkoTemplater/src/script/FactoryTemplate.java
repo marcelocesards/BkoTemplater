@@ -4,26 +4,25 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Scanner;
 
-import scriptTest.TemplateScript;
+import script.TemplateScript;
 
 public class FactoryTemplate {
 
 	public TemplateScript getTemplate(String caminhoArquivo) {
-		Scanner entrada = null;
+		Scanner textoEntrada = null;
 		String textoArquivo = "";
 		try {
 			InputStream is = new FileInputStream(caminhoArquivo);
-			entrada = new Scanner(is);
-			
-			while (entrada.hasNextLine()) {
-				textoArquivo += entrada.nextLine() + "\n";
-			}			
+			textoEntrada = new Scanner(is);
+
+			while (textoEntrada.hasNextLine()) {
+				textoArquivo += textoEntrada.nextLine() + "\n";
+			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		} finally {
-			entrada.close();
+			textoEntrada.close();
 		}
 		return new TemplateScript(textoArquivo);
 	}
-
 }

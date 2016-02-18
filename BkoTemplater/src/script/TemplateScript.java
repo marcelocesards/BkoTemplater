@@ -3,6 +3,10 @@ package script;
 public class TemplateScript{
 	String template;
 
+	public TemplateScript(String textoArquivo) {
+		template = textoArquivo;
+	}
+
 	public String getTemplate() {
 		return template;
 	}
