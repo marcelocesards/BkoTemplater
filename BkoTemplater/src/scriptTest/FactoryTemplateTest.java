@@ -9,10 +9,10 @@ import script.FactoryTemplate;
 public class FactoryTemplateTest {
 	FactoryTemplate criaTemplate = new FactoryTemplate();
 
-	TemplateScript script = criaTemplate.getTemplate("arquivo.tpt");
+	TemplateScript script = criaTemplate.getTemplate("arquivo.txt");
 
 	@Test
 	public void testLeituraArquivo() {
-		assertEquals("texto arquivo", script.toString());
+		assertEquals("texto", script.toString().trim());
 	}
 }
