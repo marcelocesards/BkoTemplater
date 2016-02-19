@@ -5,6 +5,10 @@ import java.util.List;
 public class Script {
 	private Template template;
 	private List<Metodo> metodos;
+	
+	public Script(Template template) {
+		this.template = template;
+	}
 
 	public Template getScript() {
 		return template;
