@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import script.TemplateScript;
 
-public class FactoryTemplate {
+public class TemplateFactory {
 
 	public TemplateScript getTemplate(String caminhoArquivo) {
 		Scanner textoEntrada = null;

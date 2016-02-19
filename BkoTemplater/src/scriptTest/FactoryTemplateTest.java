@@ -4,11 +4,11 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import script.FactoryTemplate;
+import script.TemplateFactory;
 import script.TemplateScript;
 
 public class FactoryTemplateTest {
-	FactoryTemplate criaTemplate = new FactoryTemplate();
+	TemplateFactory criaTemplate = new TemplateFactory();
 
 	TemplateScript script = criaTemplate.getTemplate("bin/scriptTest/arquivo.txt");
 
