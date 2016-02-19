@@ -18,8 +18,8 @@ public class Script {
 		return metodos;
 	}
 
-	public void addMetodo(Metodo metodos) {
-		this.metodos.add(metodos);
+	public void addMetodo(Metodo metodo) {
+		this.metodos.add(metodo);
 	}
 
 	public void gerarSrcript() {
