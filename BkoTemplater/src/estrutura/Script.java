@@ -1,4 +1,4 @@
-package script;
+package estrutura;
 
 import java.util.List;
 

@@ -1,10 +1,10 @@
-package script;
+package factory;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Scanner;
 
-import script.TemplateScript;
+import estrutura.TemplateScript;
 
 public class TemplateFactory {
 

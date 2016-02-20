@@ -1,4 +1,4 @@
-package script;
+package estrutura;
 
 public class TemplateScript{
 	String template;

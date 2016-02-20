@@ -1,17 +1,16 @@
-package scriptTest;
+package estruturaTest;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import script.Parametro;
-import script.ParametroFactory;
-
+import estrutura.Parametro;
+import factory.ParametroFactory;
 
 public class ParametroFactoryTest {
 	ParametroFactory factoryParametro = new ParametroFactory();
 
-	Parametro parametro = factoryParametro.getParametro("valida_cliente", "in", "varchar2", 100);
+	Parametro parametro = factoryParametro.getParametro("valida_cliente", "in", "varchar2", 100, "null");
 
 	@Test
 	public void testLeituraArquivo() {
