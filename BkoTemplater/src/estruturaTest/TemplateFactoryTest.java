@@ -10,7 +10,7 @@ import factory.TemplateFactory;
 public class TemplateFactoryTest {
 	TemplateFactory criaTemplate = new TemplateFactory();
 
-	TemplateScript script = criaTemplate.getTemplate("bin/scriptTest/arquivo.txt");
+	TemplateScript script = criaTemplate.getTemplate("bin/estruturaTest/arquivo.txt");
 
 	@Test
 	public void testLeituraArquivo() {
