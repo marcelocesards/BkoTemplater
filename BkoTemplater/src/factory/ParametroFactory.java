@@ -1,6 +1,6 @@
 package factory;
 
-import estrutura.Parametro;
+import script.Parametro;
 
 public class ParametroFactory {
 

@@ -4,7 +4,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Scanner;
 
-import estrutura.TemplateScript;
+import script.TemplateScript;
 
 public class TemplateFactory {
 

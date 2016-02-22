@@ -1,4 +1,4 @@
-package estrutura;
+package script;
 
 public class Parametro {
 	private String nome;

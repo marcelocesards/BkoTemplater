@@ -1,16 +1,16 @@
-package estruturaTest;
+package scriptTest;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import estrutura.TemplateScript;
 import factory.TemplateFactory;
+import script.TemplateScript;
 
 public class TemplateFactoryTest {
 	TemplateFactory criaTemplate = new TemplateFactory();
 
-	TemplateScript script = criaTemplate.getTemplate("bin/estruturaTest/arquivo.txt");
+	TemplateScript script = criaTemplate.getTemplate("bin/scriptTest/arquivo.txt");
 
 	@Test
 	public void testLeituraArquivo() {

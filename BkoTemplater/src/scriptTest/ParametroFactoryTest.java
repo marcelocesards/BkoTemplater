@@ -1,11 +1,11 @@
-package estruturaTest;
+package scriptTest;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import estrutura.Parametro;
 import factory.ParametroFactory;
+import script.Parametro;
 
 public class ParametroFactoryTest {
 	ParametroFactory factoryParametro = new ParametroFactory();

@@ -2,10 +2,10 @@ package factory;
 
 import java.util.List;
 
-import estrutura.Funcao;
-import estrutura.Metodo;
-import estrutura.Parametro;
-import estrutura.Procedimento;
+import script.Funcao;
+import script.Metodo;
+import script.Parametro;
+import script.Procedimento;
 
 public class MetodoFactory {
 

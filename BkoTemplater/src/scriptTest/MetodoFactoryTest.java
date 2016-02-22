@@ -1,4 +1,4 @@
-package estruturaTest;
+package scriptTest;
 
 import static org.junit.Assert.assertEquals;
 
@@ -7,10 +7,10 @@ import java.util.List;
 
 import org.junit.Test;
 
-import estrutura.Metodo;
-import estrutura.Parametro;
 import factory.MetodoFactory;
 import factory.ParametroFactory;
+import script.Metodo;
+import script.Parametro;
 
 public class MetodoFactoryTest {
 	MetodoFactory criaMetodo = new MetodoFactory();
