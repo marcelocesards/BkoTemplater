@@ -1,13 +1,13 @@
 package factory;
 
 import java.io.FileInputStream;
-import java.io.InputStream;
 import java.util.Scanner;
 
 import script.Template;
 import script.TemplateScript;
+import script.Templates;
 
-public class TemplateFactory implements Template{
+public class TemplateFactory implements Templates{
 	String caminhoArquivo;
 	
 	public TemplateFactory(String caminhoArquivo) {
@@ -15,19 +15,14 @@ public class TemplateFactory implements Template{
 	}
 	
 	public Template getTemplate() {
-		Scanner textoEntrada = null;
 		String textoArquivo = "";
-		try {
-			InputStream is = new FileInputStream(caminhoArquivo);
-			textoEntrada = new Scanner(is);
-
+		try (Scanner textoEntrada = new Scanner(new FileInputStream(caminhoArquivo))){
+			
 			while (textoEntrada.hasNextLine()) {
 				textoArquivo += textoEntrada.nextLine() + "\n";
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-		} finally {
-			textoEntrada.close();
 		}
 		return new TemplateScript(textoArquivo);
 	}
