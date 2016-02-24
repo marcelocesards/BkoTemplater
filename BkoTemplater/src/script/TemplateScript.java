@@ -1,16 +1,16 @@
 package script;
 
-public class TemplateScript{
+public class TemplateScript implements Template{
 	String template;
 
 	public TemplateScript(String textoArquivo) {
 		template = textoArquivo;
 	}
 
-	public String getTemplate() {
+	public String getTemplateText() {
 		return template;
 	}
-
+	
 	public void setTemplate(String template) {
 		this.template = template;
 	}

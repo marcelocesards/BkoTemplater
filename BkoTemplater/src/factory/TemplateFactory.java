@@ -4,11 +4,17 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Scanner;
 
+import script.Template;
 import script.TemplateScript;
 
-public class TemplateFactory {
-
-	public TemplateScript getTemplate(String caminhoArquivo) {
+public class TemplateFactory implements Template{
+	String caminhoArquivo;
+	
+	public TemplateFactory(String caminhoArquivo) {
+		this.caminhoArquivo = caminhoArquivo;
+	}
+	
+	public Template getTemplate() {
 		Scanner textoEntrada = null;
 		String textoArquivo = "";
 		try {

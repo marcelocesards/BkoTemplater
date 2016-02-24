@@ -8,9 +8,9 @@ import factory.TemplateFactory;
 import script.TemplateScript;
 
 public class TemplateFactoryTest {
-	TemplateFactory criaTemplate = new TemplateFactory();
+	TemplateFactory criaTemplate = new TemplateFactory("bin/scriptTest/arquivo.txt");
 
-	TemplateScript script = criaTemplate.getTemplate("bin/scriptTest/arquivo.txt");
+	TemplateScript script = (TemplateScript) criaTemplate.getTemplate();
 
 	@Test
 	public void testLeituraArquivo() {

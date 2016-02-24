@@ -2,14 +2,13 @@ package script;
 
 import java.util.List;
 
-public class Script {
-	private Template template;
+public abstract class Script {
+	
+	protected abstract Templates criarTemplate();
+	
+	private Template template = criarTemplate().getTemplate();
 	private List<Metodo> metodos;
 	
-	public Script(Template template) {
-		this.template = template;
-	}
-
 	public Template getScript() {
 		return template;
 	}
