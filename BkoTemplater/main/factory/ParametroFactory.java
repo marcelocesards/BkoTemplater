@@ -1,6 +1,6 @@
 package factory;
 
-import script.Parametro;
+import model.Parametro;
 
 public class ParametroFactory {
 

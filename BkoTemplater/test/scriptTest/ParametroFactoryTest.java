@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import factory.ParametroFactory;
-import script.Parametro;
+import model.Parametro;
 
 public class ParametroFactoryTest {
 	ParametroFactory factoryParametro = new ParametroFactory();

@@ -2,6 +2,9 @@ package script;
 
 import java.util.List;
 
+import model.Metodo;
+import model.Parametro;
+
 public class Funcao extends Metodo {
 	private Parametro retorno;
 	

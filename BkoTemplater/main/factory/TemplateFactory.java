@@ -3,8 +3,8 @@ package factory;
 import java.io.FileInputStream;
 import java.util.Scanner;
 
+import model.TemplateScript;
 import script.Template;
-import script.TemplateScript;
 import script.Templates;
 
 public class TemplateFactory implements Templates{

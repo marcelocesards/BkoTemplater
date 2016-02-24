@@ -1,4 +1,4 @@
-package script;
+package model;
 
 public class Parametro {
 	private String nome;

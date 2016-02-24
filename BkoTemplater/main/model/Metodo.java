@@ -1,4 +1,4 @@
-package script;
+package model;
 
 import java.util.List;
 

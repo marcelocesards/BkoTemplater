@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import factory.TemplateFactory;
-import script.TemplateScript;
+import model.TemplateScript;
 
 public class TemplateFactoryTest {
 	TemplateFactory criaTemplate = new TemplateFactory("bin/scriptTest/arquivo.txt");

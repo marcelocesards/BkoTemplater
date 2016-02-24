@@ -9,8 +9,8 @@ import org.junit.Test;
 
 import factory.MetodoFactory;
 import factory.ParametroFactory;
-import script.Metodo;
-import script.Parametro;
+import model.Metodo;
+import model.Parametro;
 
 public class MetodoFactoryTest {
 	MetodoFactory criaMetodo = new MetodoFactory();

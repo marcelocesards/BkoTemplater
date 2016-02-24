@@ -1,4 +1,6 @@
-package script;
+package model;
+
+import script.Template;
 
 public class TemplateScript implements Template{
 	String template;

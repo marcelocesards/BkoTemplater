@@ -2,6 +2,8 @@ package script;
 
 import java.util.List;
 
+import model.Metodo;
+
 public abstract class Script {
 	
 	protected abstract Templates criarTemplate();

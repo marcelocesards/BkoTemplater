@@ -2,9 +2,9 @@ package factory;
 
 import java.util.List;
 
+import model.Metodo;
+import model.Parametro;
 import script.Funcao;
-import script.Metodo;
-import script.Parametro;
 import script.Procedimento;
 
 public class MetodoFactory {
