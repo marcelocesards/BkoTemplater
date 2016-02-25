@@ -13,7 +13,7 @@ public class Parametro {
 		this.modo = modo;
 		this.dataType = dataType;
 		this.precisao = precisao;
-		this.defaultValue = defaultValue;
+		this.setDefaultValue(defaultValue);
 	}
 
 	public String getNome() {
@@ -30,6 +30,14 @@ public class Parametro {
 
 	public int getPrecisao() {
 		return precisao;
+	}
+
+	public String getDefaultValue() {
+		return defaultValue;
+	}
+
+	public void setDefaultValue(String defaultValue) {
+		this.defaultValue = defaultValue;
 	}
 
 }

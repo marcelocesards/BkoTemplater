@@ -1,5 +1,6 @@
 package script;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import model.Metodo;
@@ -9,7 +10,7 @@ public abstract class Script {
 	protected abstract Templates criarTemplate();
 	
 	private Template template = criarTemplate().getTemplate();
-	private List<Metodo> metodos;
+	private List<Metodo> metodos = new ArrayList<Metodo>();
 	
 	public Template getScript() {
 		return template;
