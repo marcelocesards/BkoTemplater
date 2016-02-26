@@ -14,6 +14,6 @@ public class TemplateFactoryTest {
 
 	@Test
 	public void testLeituraArquivo() {
-		assertEquals("texto", script.toString().trim());
+		assertEquals("texto", script.toString());
 	}
 }

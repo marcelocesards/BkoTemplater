@@ -11,10 +11,11 @@ import org.junit.Test;
 import model.Metodo;
 import model.Parametro;
 import script.Funcao;
+import script.GeradorScript;
 import script.Script;
 import script.ScriptTratamento;
 
-public class ScriptTratamentoAdicionarMetodo {
+public class GeradorScriptTest {
 	Script script; 
 	Metodo metodo;
 	Parametro parametro;
@@ -30,10 +31,15 @@ public class ScriptTratamentoAdicionarMetodo {
 		 metodo.addParametro(parametro);
 		 
 		 script.addMetodo(metodo);
+		 
+		 script.setGerador(new GeradorScript());
+		 
+		 script.gerarScript();
 	}
 	
 	@Test
-	public void adicionarMetodo(){		
-		assertEquals("validar", script.getMetodoList().get(0).getNome());
+	public void scriptGerarScript(){
+		assertEquals("texto\nMarcelo", script.getScript().toString().trim());
 	}
+	
 }

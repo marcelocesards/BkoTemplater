@@ -18,8 +18,12 @@ public class TemplateFactory implements Templates{
 		String textoArquivo = "";
 		try (Scanner textoEntrada = new Scanner(new FileInputStream(caminhoArquivo))){
 			
-			while (textoEntrada.hasNextLine()) {
-				textoArquivo += textoEntrada.nextLine() + "\n";
+			while (textoEntrada.hasNextLine()) {				
+				textoArquivo += textoEntrada.nextLine();
+				
+				if (textoEntrada.hasNextLine()){
+					textoArquivo += "\n";
+				}				
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
