@@ -13,7 +13,7 @@ public class TemplateScript implements Template{
 		return template;
 	}
 	
-	public void setTemplate(String template) {
+	public void setTemplateText(String template) {
 		this.template = template;
 	}
 

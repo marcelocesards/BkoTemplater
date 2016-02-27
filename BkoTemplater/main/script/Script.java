@@ -20,6 +20,10 @@ public abstract class Script {
 	public void setTemplate(Template template) {
 		this.template = template;
 	}
+	
+	public void atualizaTemplateText(String novoTexto){
+		template.setTemplateText(novoTexto);
+	}
 
 	public List<Metodo> getMetodoList() {
 		return metodos;

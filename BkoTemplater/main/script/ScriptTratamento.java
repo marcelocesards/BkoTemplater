@@ -6,6 +6,6 @@ public class ScriptTratamento extends Script{
 	
 	@Override
 	protected Templates criarTemplate() {
-		return new TemplateFactory("bin/scriptTest/arquivo.txt");
+		return new TemplateFactory("bin/Templates/Tratamento.tpt");
 	}
 }

@@ -39,7 +39,9 @@ public class GeradorScriptTest {
 	
 	@Test
 	public void scriptGerarScript(){
-		assertEquals("texto\nMarcelo", script.getScript().toString().trim());
+		assertEquals("/**region metod declaration*/\n"
+				+ "novoMetodo\n"
+				+ "/**end region metod declaration*/", script.getScript().toString().trim());
 	}
 	
 }
