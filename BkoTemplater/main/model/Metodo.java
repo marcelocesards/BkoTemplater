@@ -6,11 +6,13 @@ public abstract class Metodo {
 	private String nome;
 	private List<Parametro> parametros;
 	private String body;
+	private Parametro retorno;
 	
-	public Metodo(String nome, List<Parametro> parametros, String body) {
+	public Metodo(String nome, List<Parametro> parametros, String body, Parametro retorno) {
 		this.nome = nome;
 		this.parametros = parametros;
 		this.setBody(body);
+		this.retorno = retorno;
 	}
 
 	public List<Parametro> getParametros() {

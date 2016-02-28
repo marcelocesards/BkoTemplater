@@ -1,5 +1,7 @@
 package script;
 
+import java.util.List;
+
 import model.Metodo;
 import model.Parametro;
 
@@ -18,12 +20,11 @@ public class GeradorScript implements Gerador {
 		textoScript.append(this.script.getScript().toString());
 		textoScript.append("\nMarcelo\nTeste");
 
-		inicioRegiaoInvocacao = textoScript.indexOf("/**region metod declaration*/");
-		fimRegiaoInvocacao = textoScript.indexOf("/**region metod declaration*/");
+		atualizaIndices();
 
 		textoScript.insert(fimRegiaoDeclaracao - 1, "novoMetodo\n\n");
 
-		//insereMetodos();
+		insereMetodos();
 
 		System.out.println(textoScript.substring(inicioRegiaoDeclaracao, fimRegiaoDeclaracao + 45));
 		System.out.println(inicioRegiaoDeclaracao);
@@ -40,20 +41,27 @@ public class GeradorScript implements Gerador {
 		for (Metodo metodo : script.getMetodoList()) {
 			atualizaIndices();
 
-			String metodoText = uneParametrosAoMetodo(metodo);
+	    	String metodoText = uneParametrosAoMetodo(metodo);
 
 			textoScript.insert(fimRegiaoDeclaracao - 1, metodoText + "\n\n");
 
 		}
 	}
 
-	private String uneParametrosAoMetodo(Metodo metodo) {
+	private String uneParametrosAoMetodo(Metodo metodo) {		
+		String parametros = converteListaParametroParaString(metodo);
+		
+		return "";
+	}
+
+	private String converteListaParametroParaString(Metodo metodo) {
 		StringBuilder metodoTexto = new StringBuilder();
 		int quantidadeParametro = 0;
+		List<Parametro> parametros =  metodo.getParametros();
 		
-		for (Parametro parametro : metodo.getParametros()) {
-
-			if (quantidadeParametro++ > 1) {
+		for (Parametro parametro :  parametros) {
+			quantidadeParametro++;
+			if (quantidadeParametro > 1) {
 				metodoTexto.append(",\n");
 			}
 
@@ -72,13 +80,13 @@ public class GeradorScript implements Gerador {
 			metodoTexto.append(parametro.getPrecisao());
 
 			if (parametro.getDefaultValue() != null) {
-				metodoTexto.append(" ");
+				metodoTexto.append(" default ");
 				metodoTexto.append(parametro.getDefaultValue());
 			}
 
 			System.out.println(metodoTexto);
 		}
-		return metodoTexto.toString();
+		return metodoTexto.toString();		
 	}
 
 	private void atualizaIndices() {

@@ -7,10 +7,9 @@ import model.Parametro;
 
 public class Funcao extends Metodo {
 	private Parametro retorno;
-	
+
 	public Funcao(String nome, List<Parametro> parametros, String body, Parametro retorno) {
-		super(nome, parametros, body);		
-		this.retorno = retorno;
+		super(nome, parametros, body, retorno);
 	}
 
 	public Parametro getRetorno() {
