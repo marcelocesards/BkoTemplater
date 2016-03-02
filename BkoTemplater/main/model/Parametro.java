@@ -87,5 +87,16 @@ public class Parametro {
 			parametroTexto.append("v_bko." + this.getNome());
 		return parametroTexto.toString();
 	}
+	
+	public String comandoSalvarParametroToString(){
+		StringBuilder parametroTexto = new StringBuilder();
+		
+		parametroTexto.append(this.getNome());
+
+			parametroTexto.append(" = ");
+			
+			parametroTexto.append("pbko." + this.getNome());
+		return parametroTexto.toString();
+	}
 
 }

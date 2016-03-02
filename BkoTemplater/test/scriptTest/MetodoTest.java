@@ -69,4 +69,14 @@ public class MetodoTest {
 				+ "          saldo_cliente => v_bko.saldo_cliente,\n"
 				+ "          saldo_cliente => v_bko.saldo_cliente);", metodo.getChamadaMetodo());
 	}
+	
+	@Test
+	public void getSalvarCampo(){
+		System.out.println("["+ metodo.getComandoSalvar()+"]");
+		assertEquals(
+				  "           nome_cliente = pbko.nome_cliente,\n"
+				+ "           saldo_cliente = pbko.saldo_cliente,\n"
+				+ "           saldo_cliente = pbko.saldo_cliente,\n"
+				+ "           saldo_cliente = pbko.saldo_cliente,\n", metodo.getComandoSalvar());
+	}
 }

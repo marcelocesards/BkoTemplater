@@ -16,8 +16,6 @@ public class GeradorScript implements Gerador {
 		textoScript = new StringBuilder();
 		textoScript.append(this.script.getScript().toString());
 
-		atualizaIndices();
-
 		insereMetodos();
 		
 		insereChamadaMetodos();

@@ -30,4 +30,9 @@ public class ParametroTest {
 		assertEquals("nome_cliente => v_bko.nome_cliente", parametro.ChamadaParametroToString());
 	}	
 	
+	@Test
+	public void comandoSalvarParametroToString() {
+		assertEquals("nome_cliente = pbko.nome_cliente", parametro.comandoSalvarParametroToString());
+	}	
+	
 }

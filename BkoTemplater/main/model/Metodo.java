@@ -139,4 +139,16 @@ public abstract class Metodo {
 		indentacaoChamadaParametro += (9 + retorno.getNome().length());
 		return "v_bko." + retorno.getNome() + " = ";
 	}
+	
+	public String getComandoSalvar(){
+		StringBuilder parametrosTexto = new StringBuilder();
+		indentacaoChamadaParametro = 10;
+						
+		for (Parametro parametro : parametros) {
+			parametrosTexto.append("           ");
+			parametrosTexto.append(parametro.comandoSalvarParametroToString());		
+			parametrosTexto.append(",\n");
+		}
+		return parametrosTexto.toString();
+	}
 }

@@ -65,7 +65,19 @@ public class GeradorScriptTest {
                 + "                                saldo_cliente => v_bko.saldo_cliente,\n"
                 + "                                saldo_cliente => v_bko.saldo_cliente,\n"
                 + "                                saldo_cliente => v_bko.saldo_cliente);\n\n"
-				+ " /**end region target metod*/", script.getScript().toString().substring(2091, 2480));
+				+ " /**end region target metod*/", script.getScript().toString().substring(2163, 2552));
+	}
+	
+	@Test
+	public void scriptGerarScriptSalvarParametro(){
+		System.out.println(script.getScript().toString());
+		assertEquals("/**region save*/\n        \n"
+				+ "               v_bko.saldo_cliente = validar(\n"
+                + "                                nome_cliente => v_bko.nome_cliente,\n"
+                + "                                saldo_cliente => v_bko.saldo_cliente,\n"
+                + "                                saldo_cliente => v_bko.saldo_cliente,\n"
+                + "                                saldo_cliente => v_bko.saldo_cliente);\n\n"
+				+ " /**end region save*/", script.getScript().toString().substring(2163, 2552));
 	}
 	
 }
