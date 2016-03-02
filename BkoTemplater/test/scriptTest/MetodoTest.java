@@ -61,7 +61,7 @@ public class MetodoTest {
 	
 	@Test
 	public void getChamadaMetodo(){
-		System.out.println("["+ metodo.getMetodoToString()+"]");
+		System.out.println("["+ metodo.getChamadaMetodo()+"]");
 		assertEquals(
 				  "        validar(\n"
 				+ "          nome_cliente => v_bko.nome_cliente,\n"

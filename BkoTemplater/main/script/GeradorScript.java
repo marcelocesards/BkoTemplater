@@ -51,6 +51,6 @@ public class GeradorScript implements Gerador {
 		inicioRegiaoDeclaracao = textoScript.indexOf("/**region metod declaration*/");
 		fimRegiaoDeclaracao = textoScript.indexOf("/**end region metod declaration*/");
 		inicioRegiaoInvocacao = textoScript.indexOf("/**region target metod*/");
-		fimRegiaoInvocacao = textoScript.indexOf("/**end region metod declaration*/");
+		fimRegiaoInvocacao = textoScript.indexOf("/**end region target metod*/");
 	}
 }

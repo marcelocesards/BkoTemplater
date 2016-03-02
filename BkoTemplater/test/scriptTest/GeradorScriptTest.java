@@ -58,14 +58,14 @@ public class GeradorScriptTest {
 	
 	@Test
 	public void scriptGerarScriptChamadaMetodos(){
-		assertEquals("/**region metod declaration*/\n  \n"
-				+ "   FUNCTION validar(\n"
-                + "    nome_cliente in integer default 0,\n"
-                + "    saldo_cliente in number,\n"
-                + "    saldo_cliente in number,\n"
-                + "    saldo_cliente in number) return number IS\n"
-                + "  begin end;\n\n"
-				+ " /**end region metod declaration*/", script.getScript().toString().substring(407, 652));
+		System.out.println(script.getScript().toString());
+		assertEquals("/**region target metod*/\n        \n"
+				+ "               v_bko.saldo_cliente = validar(\n"
+                + "                                nome_cliente => v_bko.nome_cliente,\n"
+                + "                                saldo_cliente => v_bko.saldo_cliente,\n"
+                + "                                saldo_cliente => v_bko.saldo_cliente,\n"
+                + "                                saldo_cliente => v_bko.saldo_cliente);\n\n"
+				+ " /**end region target metod*/", script.getScript().toString().substring(2091, 2480));
 	}
 	
 }

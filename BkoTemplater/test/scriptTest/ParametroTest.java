@@ -25,4 +25,9 @@ public class ParametroTest {
 		assertEquals("nome_cliente integer(10)", parametro.campoParametroToString());
 	}
 
+	@Test
+	public void ChamadaParametroToString() {
+		assertEquals("nome_cliente => v_bko.nome_cliente", parametro.ChamadaParametroToString());
+	}	
+	
 }

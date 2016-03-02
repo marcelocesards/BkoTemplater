@@ -124,12 +124,12 @@ public abstract class Metodo {
 		return parametrosTexto.toString();
 	}
 	
-	private String getIndentacaoToString(int indentacaoChamadaParametro2) {
-		String indentacao;
-		for (int i = 0; i < indentacaoChamadaParametro2; i++) {
-			
+	private String getIndentacaoToString(int indentacaoInt) {
+		StringBuilder indentacao = new StringBuilder();
+		for (int i = 0; i < indentacaoInt; i++) {
+			indentacao.append(" ");
 		}
-		return null;
+		return indentacao.toString();
 	}
 
 	private String getRetornoChamada() {
