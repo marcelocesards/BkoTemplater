@@ -57,27 +57,35 @@ public class GeradorScriptTest {
 	}
 	
 	@Test
-	public void scriptGerarScriptChamadaMetodos(){
-		System.out.println(script.getScript().toString());
+	public void scriptGerarScriptChamadaMetodos(){	
 		assertEquals("/**region target metod*/\n        \n"
 				+ "               v_bko.saldo_cliente = validar(\n"
                 + "                                nome_cliente => v_bko.nome_cliente,\n"
                 + "                                saldo_cliente => v_bko.saldo_cliente,\n"
                 + "                                saldo_cliente => v_bko.saldo_cliente,\n"
                 + "                                saldo_cliente => v_bko.saldo_cliente);\n\n"
-				+ " /**end region target metod*/", script.getScript().toString().substring(2163, 2552));
+				+ " /**end region target metod*/", script.getScript().toString().substring(
+						script.getScript().toString().indexOf("/**region target metod*/"),
+						script.getScript().toString().indexOf("/**end region target metod*/") + 28));
 	}
 	
 	@Test
-	public void scriptGerarScriptSalvarParametro(){
+	public void scriptGerarScriptSalvarCampo(){
 		System.out.println(script.getScript().toString());
+		System.out.println(script.getScript().toString().indexOf("/**region save*/"));
+		System.out.println(script.getScript().toString().indexOf("/**end region save*/"));
+		System.out.println(
+				script.getScript().toString().substring(script.getScript().toString().indexOf("/**region save*/"),
+						script.getScript().toString().indexOf("/**end region save*/") + 20));
 		assertEquals("/**region save*/\n        \n"
-				+ "               v_bko.saldo_cliente = validar(\n"
-                + "                                nome_cliente => v_bko.nome_cliente,\n"
-                + "                                saldo_cliente => v_bko.saldo_cliente,\n"
-                + "                                saldo_cliente => v_bko.saldo_cliente,\n"
-                + "                                saldo_cliente => v_bko.saldo_cliente);\n\n"
-				+ " /**end region save*/", script.getScript().toString().substring(2163, 2552));
+				+ "               saldo_cliente = validar(\n"
+                + "                                nome_cliente = pbko.nome_cliente,\n"
+                + "                                saldo_cliente = pbko.saldo_cliente,\n"
+                + "                                saldo_cliente = pbko.saldo_cliente,\n"
+                + "                                saldo_cliente = pbko.saldo_cliente);\n\n"
+				+ " /**end region save*/", script.getScript().toString().substring(
+						script.getScript().toString().indexOf("/**region save*/"),
+						script.getScript().toString().indexOf("/**end region save*/") + 20));
 	}
 	
 }
