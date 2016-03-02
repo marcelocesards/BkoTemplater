@@ -1,9 +1,6 @@
 package script;
 
-import java.util.List;
-
 import model.Metodo;
-import model.Parametro;
 
 public class GeradorScript implements Gerador {
 	private int inicioRegiaoDeclaracao;
@@ -18,19 +15,12 @@ public class GeradorScript implements Gerador {
 		this.script = script;
 		textoScript = new StringBuilder();
 		textoScript.append(this.script.getScript().toString());
-		textoScript.append("\nMarcelo\nTeste");
 
 		atualizaIndices();
 
-		textoScript.insert(fimRegiaoDeclaracao - 1, "novoMetodo\n\n");
-
 		insereMetodos();
-
-		System.out.println(textoScript.substring(inicioRegiaoDeclaracao, fimRegiaoDeclaracao + 45));
-		System.out.println(inicioRegiaoDeclaracao);
-		System.out.println(fimRegiaoDeclaracao);
-
-		textoScript.append(inicioRegiaoDeclaracao);
+		
+		insereChamadaMetodos();
 
 		this.script.atualizaTemplateText(textoScript.toString());
 		script = this.script;
@@ -41,56 +31,26 @@ public class GeradorScript implements Gerador {
 		for (Metodo metodo : script.getMetodoList()) {
 			atualizaIndices();
 
-	    	String metodoText = uneParametrosAoMetodo(metodo);
+	    	String metodoText = metodo.getMetodoToString();
 
 			textoScript.insert(fimRegiaoDeclaracao - 1, metodoText + "\n\n");
-
 		}
 	}
+	
+	private void insereChamadaMetodos() {
+		for (Metodo metodo : script.getMetodoList()) {
+			atualizaIndices();
 
-	private String uneParametrosAoMetodo(Metodo metodo) {		
-		String parametros = converteListaParametroParaString(metodo);
-		
-		return "";
-	}
+	    	String metodoText = metodo.getChamadaMetodo();
 
-	private String converteListaParametroParaString(Metodo metodo) {
-		StringBuilder metodoTexto = new StringBuilder();
-		int quantidadeParametro = 0;
-		List<Parametro> parametros =  metodo.getParametros();
-		
-		for (Parametro parametro :  parametros) {
-			quantidadeParametro++;
-			if (quantidadeParametro > 1) {
-				metodoTexto.append(",\n");
-			}
-
-			metodoTexto.append(parametro.getNome());
-
-			if (parametro.getModo() != null) {
-				metodoTexto.append(" ");
-				metodoTexto.append(parametro.getModo());
-
-			}
-
-			metodoTexto.append(" ");
-			metodoTexto.append(parametro.getData_type());
-
-			metodoTexto.append(" ");
-			metodoTexto.append(parametro.getPrecisao());
-
-			if (parametro.getDefaultValue() != null) {
-				metodoTexto.append(" default ");
-				metodoTexto.append(parametro.getDefaultValue());
-			}
-
-			System.out.println(metodoTexto);
-		}
-		return metodoTexto.toString();		
+			textoScript.insert(fimRegiaoInvocacao - 1, metodoText + "\n\n");
+		}		
 	}
 
 	private void atualizaIndices() {
 		inicioRegiaoDeclaracao = textoScript.indexOf("/**region metod declaration*/");
 		fimRegiaoDeclaracao = textoScript.indexOf("/**end region metod declaration*/");
+		inicioRegiaoInvocacao = textoScript.indexOf("/**region target metod*/");
+		fimRegiaoInvocacao = textoScript.indexOf("/**end region metod declaration*/");
 	}
 }

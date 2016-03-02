@@ -24,27 +24,48 @@ public class GeradorScriptTest {
 	public void criarInstancias(){
 		 script = new ScriptTratamento();
 		 
-		 parametro = new Parametro("nome_cliente","integer",10,"in","0");		 
+		 parametro = new Parametro("nome_cliente","in","integer",10,"0");		 
 		 List<Parametro> parametros = new ArrayList<>();
 		 parametros.add(parametro);
 		 
-		 parametro = new Parametro("saldo_cliente","number",10,"in","0");
+		 String retorno = "";
+		 
+		 parametro = new Parametro("saldo_cliente", "in","number",10, retorno);
+		 parametros.add(parametro);
+		 parametros.add(parametro);
 		 parametros.add(parametro);
 		 
 		 metodo = new Funcao("validar", parametros, "begin end;", parametro);
 		 		 
 		 script.addMetodo(metodo);
-		 
+		 		 
 		 script.setGerador(new GeradorScript());
 		 
 		 script.gerarScript();
 	}
 	
 	@Test
-	public void scriptGerarScript(){
-		assertEquals("/**region metod declaration*/\n"
-				+ "novoMetodo\n"
-				+ "/**end region metod declaration*/", script.getScript().toString().trim());
+	public void scriptGerarScriptMetodos(){
+		assertEquals("/**region metod declaration*/\n  \n"
+				+ "   FUNCTION validar(\n"
+                + "    nome_cliente in integer default 0,\n"
+                + "    saldo_cliente in number,\n"
+                + "    saldo_cliente in number,\n"
+                + "    saldo_cliente in number) return number IS\n"
+                + "  begin end;\n\n"
+				+ " /**end region metod declaration*/", script.getScript().toString().substring(407, 652));
+	}
+	
+	@Test
+	public void scriptGerarScriptChamadaMetodos(){
+		assertEquals("/**region metod declaration*/\n  \n"
+				+ "   FUNCTION validar(\n"
+                + "    nome_cliente in integer default 0,\n"
+                + "    saldo_cliente in number,\n"
+                + "    saldo_cliente in number,\n"
+                + "    saldo_cliente in number) return number IS\n"
+                + "  begin end;\n\n"
+				+ " /**end region metod declaration*/", script.getScript().toString().substring(407, 652));
 	}
 	
 }

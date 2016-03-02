@@ -7,18 +7,19 @@ public abstract class Metodo {
 	private List<Parametro> parametros;
 	private String body;
 	private Parametro retorno;
-	
+	private int indentacaoChamadaParametro;
+
 	public Metodo(String nome, List<Parametro> parametros, String body, Parametro retorno) {
 		this.nome = nome;
 		this.parametros = parametros;
 		this.setBody(body);
-		this.retorno = retorno;
+		this.setRetorno(retorno);
 	}
 
 	public List<Parametro> getParametros() {
 		return parametros;
 	}
-
+	
 	public void addParametro(Parametro parametro) {
 		this.parametros.add(parametro);
 	}
@@ -37,5 +38,105 @@ public abstract class Metodo {
 
 	public void setBody(String body) {
 		this.body = body;
+	}
+
+	public Parametro getRetorno() {
+		return retorno;
+	}
+
+	public void setRetorno(Parametro retorno) {
+		this.retorno = retorno;
+	}
+
+	public String getListaParametrosToString() {
+		StringBuilder parametrosTexto = new StringBuilder();
+		int quantidadeParametro = 0;
+
+		for (Parametro parametro : parametros) {
+			quantidadeParametro++;
+			if (quantidadeParametro > 1) {
+				parametrosTexto.append(",\n");
+			}
+
+			parametrosTexto.append("    ");
+			parametrosTexto.append(parametro.parametroToString());
+		}
+		return parametrosTexto.toString();
+	}
+
+	public String getMetodoToString() {
+		StringBuilder metodoTexto = new StringBuilder();
+
+		metodoTexto.append("  ");
+		metodoTexto.append(getTipoMetodo());
+
+		metodoTexto.append(" ");
+		metodoTexto.append(getNome());
+		metodoTexto.append("(\n");
+
+		metodoTexto.append(this.getListaParametrosToString());
+
+		metodoTexto.append(") ");
+		
+		metodoTexto.append(getFinalMetodo());
+
+		metodoTexto.append("\n  ");
+		metodoTexto.append(getBody());
+
+		return metodoTexto.toString();
+	}
+
+	private String getTipoMetodo() {
+		if (this.retorno.getNome().isEmpty()) {
+			return "PROCEDURE";
+		}
+		return "FUNCTION";
+	}
+
+	private String getFinalMetodo() {
+		if (this.retorno.getNome().isEmpty()) {
+			return "IS";
+		}
+		return "return " + retorno.getData_type() + " IS";
+	}
+	
+	public String getChamadaMetodo(){
+		StringBuilder parametrosTexto = new StringBuilder();
+		int quantidadeParametro = 0;
+		indentacaoChamadaParametro = 10;
+		
+		parametrosTexto.append("        ");
+		
+		parametrosTexto.append(getRetornoChamada());
+		
+		parametrosTexto.append(getNome()+"(\n");
+
+		for (Parametro parametro : parametros) {
+			quantidadeParametro++;
+			if (quantidadeParametro > 1) {
+				parametrosTexto.append(",\n");
+			}
+
+			parametrosTexto.append(getIndentacaoToString(indentacaoChamadaParametro));
+			parametrosTexto.append(parametro.ChamadaParametroToString());			
+		}
+		parametrosTexto.append(");");
+		return parametrosTexto.toString();
+	}
+	
+	private String getIndentacaoToString(int indentacaoChamadaParametro2) {
+		String indentacao;
+		for (int i = 0; i < indentacaoChamadaParametro2; i++) {
+			
+		}
+		return null;
+	}
+
+	private String getRetornoChamada() {
+		if (this.retorno.getNome().isEmpty()) {
+			return "";
+		}
+		indentacaoChamadaParametro += (9 + retorno.getNome().length());
+		return "v_bko." + retorno.getNome() + " = ";
 	}
 }
