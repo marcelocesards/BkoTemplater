@@ -11,6 +11,6 @@ public class ScriptTratamentoTest {
 	
 	@Test
 	public void testLeituraArquivo() {
-		assertEquals("texto", script.getScript().toString().trim());
+		assertEquals(true, script.getScript().toString().contains("DECLARE"));
 	}
 }
