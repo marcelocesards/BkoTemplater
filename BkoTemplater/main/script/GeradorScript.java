@@ -31,11 +31,11 @@ public class GeradorScript implements Gerador {
 	private void insereSaveCampos() {
 		for (Metodo metodo : script.getMetodoList()) {
 			atualizaIndices();
-
+			
 			String metodoText = metodo.getComandoSalvar();
-
-			textoScript.insert(fimRegiaoSave - 1, metodoText + "\n\n");
-		}		
+						
+			textoScript.insert(fimRegiaoSave -1, metodoText);
+		}
 	}
 
 	private void insereMetodos() {

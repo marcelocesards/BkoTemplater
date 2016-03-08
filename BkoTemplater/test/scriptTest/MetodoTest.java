@@ -24,7 +24,7 @@ public class MetodoTest {
 	public void criarInstancias(){
 		 script = new ScriptTratamento();
 		  
-		 parametro = new Parametro("nome_cliente", "in","integer",10,"0");		 
+		 parametro = new Parametro("nome_cliente", "in out","integer",10,"0");		 
 		 List<Parametro> parametros = new ArrayList<>();
 		 parametros.add(parametro);
 		 
@@ -32,7 +32,7 @@ public class MetodoTest {
 		 
 		 retorno = new Parametro("", "","",0,"");	
 		 
-		 parametro = new Parametro("saldo_cliente", "in","number",10, defaultValue);
+		 parametro = new Parametro("saldo_cliente", "in out","number",10, defaultValue);
 		 parametros.add(parametro);
 		 parametros.add(parametro);
 		 parametros.add(parametro);
@@ -42,20 +42,20 @@ public class MetodoTest {
 	
 	@Test
 	public void getListaParametroToString(){
-		assertEquals("    nome_cliente in integer default 0,\n"
-				+ "    saldo_cliente in number,\n"
-				+ "    saldo_cliente in number,\n"
-				+ "    saldo_cliente in number", metodo.getListaParametrosToString());
+		assertEquals("    nome_cliente in out integer default 0,\n"
+				+ "    saldo_cliente in out number,\n"
+				+ "    saldo_cliente in out number,\n"
+				+ "    saldo_cliente in out number", metodo.getListaParametrosToString());
 	}
 	
 	@Test
 	public void getMetodoToString(){
 		System.out.println("["+ metodo.getMetodoToString()+"]");
 		assertEquals("  PROCEDURE validar(\n"
-				+ "    nome_cliente in integer default 0,\n"
-				+ "    saldo_cliente in number,\n"
-				+ "    saldo_cliente in number,\n"
-				+ "    saldo_cliente in number) IS\n"
+				+ "    nome_cliente in out integer default 0,\n"
+				+ "    saldo_cliente in out number,\n"
+				+ "    saldo_cliente in out number,\n"
+				+ "    saldo_cliente in out number) IS\n"
 				+ "  begin end;", metodo.getMetodoToString());
 	}
 	

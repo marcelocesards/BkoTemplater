@@ -19,7 +19,7 @@ public abstract class Metodo {
 	public List<Parametro> getParametros() {
 		return parametros;
 	}
-	
+
 	public void addParametro(Parametro parametro) {
 		this.parametros.add(parametro);
 	}
@@ -77,7 +77,7 @@ public abstract class Metodo {
 		metodoTexto.append(this.getListaParametrosToString());
 
 		metodoTexto.append(") ");
-		
+
 		metodoTexto.append(getFinalMetodo());
 
 		metodoTexto.append("\n  ");
@@ -99,17 +99,17 @@ public abstract class Metodo {
 		}
 		return "return " + retorno.getData_type() + " IS";
 	}
-	
-	public String getChamadaMetodo(){
+
+	public String getChamadaMetodo() {
 		StringBuilder parametrosTexto = new StringBuilder();
 		int quantidadeParametro = 0;
 		indentacaoChamadaParametro = 10;
-		
+
 		parametrosTexto.append("        ");
-		
+
 		parametrosTexto.append(getRetornoChamada());
-		
-		parametrosTexto.append(getNome()+"(\n");
+
+		parametrosTexto.append(getNome() + "(\n");
 
 		for (Parametro parametro : parametros) {
 			quantidadeParametro++;
@@ -118,12 +118,12 @@ public abstract class Metodo {
 			}
 
 			parametrosTexto.append(getIndentacaoToString(indentacaoChamadaParametro));
-			parametrosTexto.append(parametro.ChamadaParametroToString());			
+			parametrosTexto.append(parametro.ChamadaParametroToString());
 		}
 		parametrosTexto.append(");");
 		return parametrosTexto.toString();
 	}
-	
+
 	private String getIndentacaoToString(int indentacaoInt) {
 		StringBuilder indentacao = new StringBuilder();
 		for (int i = 0; i < indentacaoInt; i++) {
@@ -139,14 +139,22 @@ public abstract class Metodo {
 		indentacaoChamadaParametro += (9 + retorno.getNome().length());
 		return "v_bko." + retorno.getNome() + " = ";
 	}
-	
-	public String getComandoSalvar(){
+
+	public String getComandoSalvar() {
 		StringBuilder parametrosTexto = new StringBuilder();
-		indentacaoChamadaParametro = 10;
-						
-		for (Parametro parametro : parametros) {
+
+		if (!this.retorno.getNome().isEmpty()) {
 			parametrosTexto.append("           ");
-			parametrosTexto.append(parametro.comandoSalvarParametroToString());		
+			parametrosTexto.append(retorno.comandoSalvarParametroToString());
+			parametrosTexto.append(",\n");
+		}
+		
+		for (Parametro parametro : parametros) {
+			if (parametro.getModo() == "in" || parametro.getModo() == "") {
+				continue;
+			}
+			parametrosTexto.append("           ");
+			parametrosTexto.append(parametro.comandoSalvarParametroToString());
 			parametrosTexto.append(",\n");
 		}
 		return parametrosTexto.toString();
