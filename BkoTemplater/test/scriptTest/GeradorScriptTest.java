@@ -46,41 +46,43 @@ public class GeradorScriptTest {
 	
 	@Test
 	public void scriptGerarScriptMetodos(){
-		assertEquals("/**region metod declaration*/\n  \n"
-				+ "   FUNCTION validar(\n"
+		assertEquals("/**declaracao_metodo*/\n"
+				+ "  FUNCTION validar(\n"
                 + "    nome_cliente in out integer default 0,\n"
                 + "    saldo_cliente out number,\n"
                 + "    saldo_cliente out number,\n"
                 + "    saldo_cliente out number) return number IS\n"
-                + "  begin end;\n\n"
-				+ " /**end region metod declaration*/", script.getScript().toString().substring(407, 659));
+                + "  begin end;\n\n\n"
+				+ "/**fim_declaracao_metodo*/", script.getScript().toString().substring(
+						script.getScript().toString().indexOf("/**declaracao_metodo*/"),
+						script.getScript().toString().indexOf("/**fim_declaracao_metodo*/") + 26));
 	}
 	
 	@Test
 	public void scriptGerarScriptChamadaMetodos(){	
-		assertEquals("/**region target metod*/\n        \n"
-				+ "               v_bko.saldo_cliente = validar(\n"
+		assertEquals("/**chamada_metodo*/\n"
+				+ "        v_bko.saldo_cliente = validar(\n"
                 + "                                nome_cliente => v_bko.nome_cliente,\n"
                 + "                                saldo_cliente => v_bko.saldo_cliente,\n"
                 + "                                saldo_cliente => v_bko.saldo_cliente,\n"
-                + "                                saldo_cliente => v_bko.saldo_cliente);\n\n"
-				+ " /**end region target metod*/", script.getScript().toString().substring(
-						script.getScript().toString().indexOf("/**region target metod*/"),
-						script.getScript().toString().indexOf("/**end region target metod*/") + 28));
+                + "                                saldo_cliente => v_bko.saldo_cliente);\n\n\n"
+				+ "/**fim_chamada_metodo*/", script.getScript().toString().substring(
+						script.getScript().toString().indexOf("/**chamada_metodo*/"),
+						script.getScript().toString().indexOf("/**fim_chamada_metodo*/") + 23));
 	}
 	
 	@Test
 	public void scriptGerarScriptSalvarCampo(){
 		System.out.println(script.getScript().toString());
-		assertEquals("/**region save*/\n"
+		assertEquals("/**salva_tabela*/\n"
 				+ "           saldo_cliente = pbko.saldo_cliente,\n"
                 + "           nome_cliente = pbko.nome_cliente,\n"
                 + "           saldo_cliente = pbko.saldo_cliente,\n"
                 + "           saldo_cliente = pbko.saldo_cliente,\n"
                 + "           saldo_cliente = pbko.saldo_cliente,\n\n"
-				+ "/**end region save*/", script.getScript().toString().substring(
-						script.getScript().toString().indexOf("/**region save*/"),
-						script.getScript().toString().indexOf("/**end region save*/") + 20));
+				+ "/**fim_salva_tabela*/", script.getScript().toString().substring(
+						script.getScript().toString().indexOf("/**salva_tabela*/"),
+						script.getScript().toString().indexOf("/**fim_salva_tabela*/") + 21));
 	}
 	
 }

@@ -1,0 +1,107 @@
+DECLARE
+  CURSOR cursor_registros(ppart IN NUMBER) IS
+    SELECT bko.rowid, bko.*
+      FROM adminprov2_10.bko_apoio_7063 bko
+     WHERE process_control = 0
+       AND partition_key = ppart;
+
+  v_bko           cursor_registros%ROWTYPE;
+  v_ctrl_cli      NUMBER := 0;
+  vthread         NUMBER;
+  vtotal_threads  NUMBER;
+  v_process_error VARCHAR2(500);
+  v_particao      NUMBER;
+  numero_sript    NUMBER;
+
+/**declaracao_metodo*/
+
+/**fim_declaracao_metodo*/
+
+  PROCEDURE atualiza_bko_apoio(pbko IN cursor_registros%ROWTYPE) IS
+  BEGIN
+    UPDATE adminprov2_10.bko_apoio_7063
+       SET process_status  = pbko.process_status,
+           process_control = pbko.process_control,
+/**salva_tabela*/
+
+/**fim_salva_tabela*/
+           process_date = SYSDATE
+     WHERE ROWID = pbko.rowid;
+  END atualiza_bko_apoio;
+
+BEGIN
+  numero_sript := 3;
+  adminprov2_10.bko_util_pck.initialize_util_pck(step          => numero_sript,
+                                                 next_step     => numero_sript + 1,
+                                                 rn            => 7063,
+                                                 numero_script => '00' ||
+                                                                  numero_sript);
+
+  vthread        := &1;
+  vtotal_threads := &2;
+
+  adminprov2_10.bko_util_pck.prc_step_control('START');
+  IF adminprov2_10.bko_util_pck.v_out_error > 0 THEN
+    raise_application_error(-20000, adminprov2_10.bko_util_pck.v_msg_error);
+  END IF;
+
+  FOR ptt IN adminprov2_10.bko_util_pck.c_particao(vthread, vtotal_threads) LOOP
+    v_particao := ptt.partition_nr;
+    adminprov2_10.bko_util_pck.log_message_start(ptt.partition_nr);
+    FOR rg IN cursor_registros(ptt.partition_nr) LOOP
+      BEGIN
+        IF MOD(v_ctrl_cli, 100) = 0 THEN
+          COMMIT;
+          adminprov2_10.bko_util_pck.abort_if_is_flagged;
+        END IF;
+        v_ctrl_cli := v_ctrl_cli + 1;
+        v_bko      := rg;
+      
+/**chamada_metodo*/
+
+/**fim_chamada_metodo*/
+      
+        v_bko.process_status  := '[OK] SUCESSO';
+        v_bko.process_control := 1;
+        atualiza_bko_apoio(v_bko);
+      EXCEPTION
+        WHEN adminprov2_10.bko_util_pck.process_exception THEN
+          v_bko.process_status  := '[NOK] ' ||
+                                   adminprov2_10.bko_util_pck.process_status ||
+                                   ' - ' ||
+                                   adminprov2_10.bko_util_pck.get_line_exception();
+          v_bko.process_control := adminprov2_10.bko_util_pck.process_control;
+          atualiza_bko_apoio(v_bko);
+        WHEN adminprov2_10.bko_util_pck.abort_proc_geral THEN
+          RAISE;
+        WHEN OTHERS THEN
+          v_process_error       := adminprov2_10.bko_util_pck.get_message_exception;
+          v_bko.process_status  := '[NOK] ' || v_process_error;
+          v_bko.process_control := -9;
+          adminprov2_10.bko_util_pck.log_message_error(mensagem => v_process_error,
+                                                       account  => v_bko.account);
+          atualiza_bko_apoio(v_bko);
+      END;
+    END LOOP;
+    COMMIT;
+  
+    adminprov2_10.bko_util_pck.log_message_end(ptt.partition_nr,
+                                               v_ctrl_cli);
+    v_ctrl_cli := 0;
+  END LOOP;
+
+  adminprov2_10.bko_util_pck.prc_step_control('END');
+EXCEPTION
+  WHEN adminprov2_10.bko_util_pck.abort_proc_geral THEN
+    v_process_error := adminprov2_10.bko_util_pck.get_message_exception;
+    adminprov2_10.bko_util_pck.log_message_error(mensagem => v_process_error,
+                                                 particao => v_particao);
+    raise_application_error(-20000, v_process_error);
+  WHEN OTHERS THEN
+    v_process_error := adminprov2_10.bko_util_pck.get_message_exception;
+    adminprov2_10.bko_util_pck.prc_step_control('ERROR');
+    adminprov2_10.bko_util_pck.log_message_error(mensagem => v_process_error,
+                                                 particao => v_particao);
+    raise_application_error(-20000, v_process_error);
+END;
+/

@@ -9,7 +9,7 @@ import model.Metodo;
 public class ScriptTratamento implements Script{
 	
 	protected Templates criarTemplate() {
-		return new TemplateFactory("bin/Templates/Tratamento.tpt");
+		return new TemplateFactory("main/resources/Template.tpt");
 	}
 	
 	private Template template = criarTemplate().getTemplate();

@@ -13,11 +13,11 @@ public class GeradorScript implements Gerador {
 		textoScript.append(this.script.getScript().toString());
 
 		for (Metodo metodo : script.getMetodoList()) {
-			insereMetodos(metodo, textoScript.indexOf("/**end region metod declaration*/"));
+			insereMetodos(metodo, textoScript.indexOf("/**fim_declaracao_metodo*/"));
 
-			insereChamadaMetodos(metodo, textoScript.indexOf("/**end region target metod*/"));
+			insereChamadaMetodos(metodo, textoScript.indexOf("/**fim_chamada_metodo*/"));
 
-			insereSaveCampos(metodo, textoScript.indexOf("/**end region save*/"));
+			insereSaveCampos(metodo, textoScript.indexOf("/**fim_salva_tabela*/"));
 		}
 
 		this.script.atualizaTemplateText(textoScript.toString());

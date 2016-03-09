@@ -8,12 +8,12 @@ import factory.TemplateFactory;
 import model.TemplateScript;
 
 public class TemplateFactoryTest {
-	TemplateFactory criaTemplate = new TemplateFactory("bin/scriptTest/arquivo.txt");
+	TemplateFactory criaTemplate = new TemplateFactory("main/resources/Template.tpt");
 
 	TemplateScript script = (TemplateScript) criaTemplate.getTemplate();
 
 	@Test
 	public void testLeituraArquivo() {
-		assertEquals("texto", script.toString());
+		assertEquals(true, script.toString().contains("DECLARE"));
 	}
 }
