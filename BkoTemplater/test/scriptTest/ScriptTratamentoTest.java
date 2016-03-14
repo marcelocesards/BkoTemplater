@@ -7,7 +7,7 @@ import org.junit.Test;
 import script.ScriptTratamento;
 
 public class ScriptTratamentoTest {
-	ScriptTratamento script = new ScriptTratamento();
+	ScriptTratamento script = new ScriptTratamento("main/resources/Template.tpt");
 	
 	@Test
 	public void testLeituraArquivo() {

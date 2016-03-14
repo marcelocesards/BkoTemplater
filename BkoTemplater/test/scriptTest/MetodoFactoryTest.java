@@ -39,6 +39,6 @@ public class MetodoFactoryTest {
 		
 		Metodo metodo = criaMetodo.getMetodo("Valida Funcao", "IN", parametros,"texto funcao", retorno2);
 		
-		assertEquals("valida_cliente", metodo.getParametros().get(0).getNome());
+		assertEquals("valida_cliente", metodo.getListaParametros().get(0).getNome());
 	}
 }

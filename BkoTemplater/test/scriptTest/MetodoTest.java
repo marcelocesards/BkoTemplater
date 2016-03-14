@@ -10,20 +10,15 @@ import org.junit.Test;
 
 import model.Metodo;
 import model.Parametro;
-import script.Funcao;
-import script.Script;
-import script.ScriptTratamento;
+import script.MetodoCriado;
 
 public class MetodoTest {
-	Script script; 
 	Metodo metodo;
 	Parametro parametro;
 	Parametro retorno;
 	
 	@Before
-	public void criarInstancias(){
-		 script = new ScriptTratamento();
-		  
+	public void criarInstancias(){		  
 		 parametro = new Parametro("nome_cliente", "in out","integer",10,"0");		 
 		 List<Parametro> parametros = new ArrayList<>();
 		 parametros.add(parametro);
@@ -37,9 +32,10 @@ public class MetodoTest {
 		 parametros.add(parametro);
 		 parametros.add(parametro);
 		 
-		 metodo = new Funcao("validar", parametros, "begin end;", retorno);
+		 metodo = new MetodoCriado("validar", parametros, "begin end;", retorno);
 	}
 	
+	/*Deprecated - private
 	@Test
 	public void getListaParametroToString(){
 		assertEquals("    nome_cliente in out integer default 0,\n"
@@ -47,6 +43,7 @@ public class MetodoTest {
 				+ "    saldo_cliente in out number,\n"
 				+ "    saldo_cliente in out number", metodo.getListaParametrosToString());
 	}
+	*/
 	
 	@Test
 	public void getMetodoToString(){

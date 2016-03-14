@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import model.Metodo;
 import model.Parametro;
-import script.Funcao;
+import script.MetodoCriado;
 import script.GeradorScript;
 import script.Script;
 import script.ScriptTratamento;
@@ -22,7 +22,7 @@ public class GeradorScriptTest {
 	
 	@Before
 	public void criarInstancias(){
-		 script = new ScriptTratamento();
+		 script = new ScriptTratamento("main/resources/Template.tpt");
 		 
 		 parametro = new Parametro("nome_cliente","in out","integer",10,"0");		 
 		 List<Parametro> parametros = new ArrayList<>();
@@ -35,7 +35,7 @@ public class GeradorScriptTest {
 		 parametros.add(parametro);
 		 parametros.add(parametro);
 		 
-		 metodo = new Funcao("validar", parametros, "begin end;", parametro);
+		 metodo = new MetodoCriado("validar", parametros, "begin end;", parametro);
 		 		 
 		 script.addMetodo(metodo);
 		 		 

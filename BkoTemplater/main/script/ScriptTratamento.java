@@ -7,12 +7,18 @@ import factory.TemplateFactory;
 import model.Metodo;
 
 public class ScriptTratamento implements Script{
+	String caminhoArquivo;
+	private Template template;
 	
+	public ScriptTratamento(String caminhoArquivo) {
+		this.caminhoArquivo = caminhoArquivo;
+		template = criarTemplate().getTemplate();
+	}
+
 	protected Templates criarTemplate() {
-		return new TemplateFactory("main/resources/Template.tpt");
+		return new TemplateFactory(caminhoArquivo);
 	}
 	
-	private Template template = criarTemplate().getTemplate();
 	private List<Metodo> metodos = new ArrayList<Metodo>();
 	private Gerador gerador;
 	

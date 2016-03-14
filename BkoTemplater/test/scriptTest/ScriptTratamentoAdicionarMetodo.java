@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import model.Metodo;
 import model.Parametro;
-import script.Funcao;
+import script.MetodoCriado;
 import script.Script;
 import script.ScriptTratamento;
 
@@ -21,11 +21,11 @@ public class ScriptTratamentoAdicionarMetodo {
 	
 	@Before
 	public void criarInstancias(){
-		 script = new ScriptTratamento();
+		 script = new ScriptTratamento("/BkoTemplater/main/resources/Template.tpt");
 		 parametro = new Parametro("nome_cliente","in","integer",10,"0");
 		 List<Parametro> parametros = new ArrayList<>();
 		 parametros.add(parametro);
-		 metodo = new Funcao("validar", parametros, "begin end;", parametro);
+		 metodo = new MetodoCriado("validar", parametros, "begin end;", parametro);
 		 
 		 metodo.addParametro(parametro);
 		 
