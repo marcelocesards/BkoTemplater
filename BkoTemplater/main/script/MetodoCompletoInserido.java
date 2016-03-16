@@ -85,6 +85,7 @@ public class MetodoCompletoInserido implements Metodo {
 	}
 
 	private void extraiListaParametros() {
+		ExtratorParametroMetodo extratorParametros = new ExtratorParametroMetodo(textoFuncao);
 		String parametrosString = textoFuncao.substring(indiceInicioParametros, indiceFimParametros).toLowerCase()
 				.trim();
 		parametrosString = parametrosString.replaceAll("\\n", " ");
@@ -111,9 +112,9 @@ public class MetodoCompletoInserido implements Metodo {
 
 			parametro = parametro.replaceAll("(\\s)+", ",");
 
-			if (parametro.contains("in") || parametro.contains("out")) {
+			if (parametro.contains(",in,") || parametro.contains(",out,")) {
 				parametro = parametro.replace("in,out,nocopy", "inoutnocopy");
-				parametro = parametro.replace("in,out", "inout");
+				parametro = parametro.replace(",in,out,", ",inout,");
 			} else {
 				StringBuilder parametroNew = new StringBuilder(parametro);
 				parametroNew.insert(parametroNew.indexOf(","), ",in");
@@ -130,7 +131,6 @@ public class MetodoCompletoInserido implements Metodo {
 					continue;
 				}
 				contadorLista++;
-				listaItensParametros.size();
 
 				if (contadorLista == 1) {
 					parametroNome = itemParametro;
