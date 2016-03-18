@@ -9,6 +9,7 @@ import script.ExtratorParametroMetodo;
 
 public class ExtratorMetodoTest {
 	ExtratorParametroMetodo extrator;
+	ExtratorParametroMetodo extratorSemParamtro;
 	
 	@Before
 	public void inicializa(){
@@ -25,6 +26,16 @@ public class ExtratorMetodoTest {
 		 		  + "END validar;";
 		
 		extrator = new ExtratorParametroMetodo(metodo);
+		
+		String metodoSemParametro = 
+		 		  "FUNCTION validar return varchar2 is\n"
+		 		  + "v_count number;\n"
+		 		  + "BEGIN\n"
+		 		  + "SELECT 1 INTO v_count FROM dual;\n"
+		 		  + "return v_count;"
+		 		  + "END validar;";
+		
+		extratorSemParamtro = new ExtratorParametroMetodo(metodoSemParametro);
 	}
 	
 	@Test
@@ -34,5 +45,10 @@ public class ExtratorMetodoTest {
 		assertEquals("cliente", extrator.getListNome().get(2));
 		assertEquals("numero_cliente", extrator.getListNome().get(3));
 		assertEquals("tipo_cliente", extrator.getListNome().get(4));
+	}
+	
+	@Test
+	public void TemParametro(){
+		assertEquals(false, extratorSemParamtro.temParametro());
 	}
 }

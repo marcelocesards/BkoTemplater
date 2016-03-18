@@ -8,30 +8,40 @@ import java.util.Map;
 
 public class ExtratorParametroMetodo {
 	String metodo;
+	ArrayList<String> listaParametros;
+	String regiaoDeclaracaoMetodo;
+	String regiaoParametros;
 
 	public ExtratorParametroMetodo(String metodo) {
 		this.metodo = metodo;
+		setRegiaoParametros();
+		if (temParametro()){
+			setListaParametro();
+		}	
 	}
 
-	public List<String> getListNome() {
+	private void setRegiaoParametros() {
+		String metodoSemQuebraDeLinha = metodo.replaceAll("\\n", " ").toLowerCase();
+		regiaoDeclaracaoMetodo = metodoSemQuebraDeLinha.substring(0, metodoSemQuebraDeLinha.indexOf(" is ")).trim();
+		
+		if (temParametro())
+			regiaoParametros = regiaoDeclaracaoMetodo
+					.substring(regiaoDeclaracaoMetodo.indexOf("(") + 1, regiaoDeclaracaoMetodo.indexOf(")")).trim();
+	}
+	
+	public boolean temParametro() {
+		return regiaoDeclaracaoMetodo.contains("(") && regiaoDeclaracaoMetodo.contains(")");		
+	}
+	
+	private void setListaParametro() {
+		listaParametros = new ArrayList<String>(Arrays.asList(regiaoParametros.split(",")));		
+	}
+
+	public List<String> getListNome() {		
 		List<String> nomes = new ArrayList<>();
-
-		String parametrosString = metodo.substring(metodo.indexOf("(") + 1, metodo.indexOf(")") - 1).toLowerCase()
-				.trim();
-		parametrosString = parametrosString.replaceAll("\\n", " ");
-
-		if (parametrosString.trim().isEmpty()) {
-			nomes.add("sem parametros");
-			return nomes;
-		}
-
-		ArrayList<String> listaParametros = new ArrayList<String>(Arrays.asList(parametrosString.split(",")));
-
 		for (String parametro : listaParametros) {
 			parametro = parametro.trim();
-
 			parametro = parametro.replaceAll("(\\s)+", ",");
-
 			nomes.add(parametro.substring(0, parametro.indexOf(",")));
 		}
 		return nomes;
