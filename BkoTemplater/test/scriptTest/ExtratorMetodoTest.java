@@ -51,4 +51,31 @@ public class ExtratorMetodoTest {
 	public void TemParametro(){
 		assertEquals(false, extratorSemParamtro.temParametro());
 	}
+	
+	@Test
+	public void getMapModo(){
+		assertEquals("in", extrator.getMapModo().get("valor"));
+		assertEquals("in", extrator.getMapModo().get("descricao"));
+		assertEquals("in", extrator.getMapModo().get("cliente"));
+		assertEquals("out", extrator.getMapModo().get("numero_cliente"));
+		assertEquals("inout", extrator.getMapModo().get("tipo_cliente"));
+	}
+	
+	@Test
+	public void getParametroType(){
+		assertEquals("number", extrator.getParametroType().get("valor"));
+		assertEquals("varchar2", extrator.getParametroType().get("descricao"));
+		assertEquals("varchar2", extrator.getParametroType().get("cliente"));
+		assertEquals("number", extrator.getParametroType().get("numero_cliente"));
+		assertEquals("varchar2", extrator.getParametroType().get("tipo_cliente"));
+	}
+	
+	@Test
+	public void getParametroDefault(){
+		assertEquals("0", extrator.getValorDefault().get("valor"));
+		assertEquals(null, extrator.getValorDefault().get("descricao"));
+		assertEquals(null, extrator.getValorDefault().get("cliente"));
+		assertEquals(null, extrator.getValorDefault().get("numero_cliente"));
+		assertEquals("'tipo vasio'", extrator.getValorDefault().get("tipo_cliente"));
+	}
 }
