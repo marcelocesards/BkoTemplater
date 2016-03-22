@@ -8,6 +8,7 @@ import java.util.List;
 import factory.ParametroFactory;
 import model.Metodo;
 import model.Parametro;
+import script.extrator.ExtratorParametro;
 
 public class MetodoCompletoInserido implements Metodo {
 	private String textoFuncao;
@@ -31,6 +32,11 @@ public class MetodoCompletoInserido implements Metodo {
 		extraiIndices();
 		extraiNomeMetodo();
 		extraiListaParametros();
+		extraiRetorno();
+	}
+
+	private void extraiRetorno() {
+		
 	}
 
 	private void extraiIndices() {
@@ -64,7 +70,27 @@ public class MetodoCompletoInserido implements Metodo {
 
 	@Override
 	public String getChamadaMetodo() {
-		return null;
+		StringBuilder parametrosTexto = new StringBuilder();
+		int quantidadeParametro = 0;
+
+		//parametrosTexto.append(getRetornoChamada());
+
+		parametrosTexto.append(getNome() + "(\n");
+
+		for (Parametro parametro : parametros) {
+			quantidadeParametro++;
+			if (quantidadeParametro > 1) {
+				parametrosTexto.append(",\n");
+			}
+
+			parametrosTexto.append(parametro.ChamadaParametroToString());
+		}
+		parametrosTexto.append(");");
+		return parametrosTexto.toString();
+	}
+	
+	private String getRetornoChamada() {
+			return this.retorno.getNome().isEmpty() ? "" : "v_bko." + retorno.getNome() + " := ";		
 	}
 
 	@Override
@@ -85,65 +111,16 @@ public class MetodoCompletoInserido implements Metodo {
 	}
 
 	private void extraiListaParametros() {
-		ExtratorParametroMetodo extratorParametros = new ExtratorParametroMetodo(textoFuncao);
-		String parametrosString = textoFuncao.substring(indiceInicioParametros, indiceFimParametros).toLowerCase()
-				.trim();
-		parametrosString = parametrosString.replaceAll("\\n", " ");
+		ExtratorParametro extratorParametros = new ExtratorParametro(textoFuncao);
 
-		if (parametrosString.trim().isEmpty()) {
+		if (extratorParametros.temParametro())
 			return;
+
+		for (String nome : extratorParametros.getListNome()) {
+			parametros.add(new ParametroFactory().getParametro(nome, extratorParametros.getMapModo().get(nome),
+					extratorParametros.getParametroType().get(nome), 0,
+					extratorParametros.getValorDefault().get(nome)));
 		}
 
-		ArrayList<String> listaParametros = new ArrayList<String>(Arrays.asList(parametrosString.split(",")));
-
-		for (String parametro : listaParametros) {
-			String parametroNome = "";
-			String parametroType = "";
-			String parametroModo = "";
-			String parametroValorDefault = "null";
-
-			parametro = parametro.trim();
-
-			// trata o default
-			if (parametro.contains("default")) {
-				parametroValorDefault = parametro.substring(parametro.indexOf("default") + 8);
-				parametro = parametro.replace(parametro.substring(parametro.indexOf("default")), "");
-			}
-
-			parametro = parametro.replaceAll("(\\s)+", ",");
-
-			if (parametro.contains(",in,") || parametro.contains(",out,")) {
-				parametro = parametro.replace("in,out,nocopy", "inoutnocopy");
-				parametro = parametro.replace(",in,out,", ",inout,");
-			} else {
-				StringBuilder parametroNew = new StringBuilder(parametro);
-				parametroNew.insert(parametroNew.indexOf(","), ",in");
-				parametro = parametroNew.toString();
-			}
-
-			ArrayList<String> listaItensParametros = new ArrayList<String>(Arrays.asList(parametro.split(",")));
-
-			int contadorLista = 0;
-
-			for (String string : listaItensParametros) {
-				String itemParametro = string.trim();
-				if (itemParametro.isEmpty()) {
-					continue;
-				}
-				contadorLista++;
-
-				if (contadorLista == 1) {
-					parametroNome = itemParametro;
-				}
-				if (contadorLista == 2) {
-					parametroModo = itemParametro;
-				}
-				if (contadorLista == 3) {
-					parametroType = itemParametro;
-				}
-			}
-			parametros.add(new ParametroFactory().getParametro(parametroNome, parametroModo, parametroType, 0,
-					parametroValorDefault));
-		}
 	}
 }

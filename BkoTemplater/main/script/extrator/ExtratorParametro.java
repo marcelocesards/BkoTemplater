@@ -1,4 +1,4 @@
-package script;
+package script.extrator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -6,16 +6,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ExtratorParametroMetodo {
-	private String metodo;
-	private ArrayList<String> listaParametros;
-	private String regiaoDeclaracaoMetodo;
-	private String regiaoParametros;
-	private List<String> nomes;
-	private Map<String, String> modo;
-	private Map<String, String> parametroType;
-	private Map<String, String> valorDefault;
-
+public class ExtratorParametro extends Extrator{
+	protected String regiaoParametros;	
+	protected ArrayList<String> listaParametros;
+	protected List<String> nomes;
+	protected Map<String, String> modo;
+	protected Map<String, String> parametroType;
+	protected Map<String, String> valorDefault;
+	
 	public List<String> getListNome() {		
 		return nomes;
 	}
@@ -32,9 +30,10 @@ public class ExtratorParametroMetodo {
 		return valorDefault;
 	}
 
-	public ExtratorParametroMetodo(String metodo) {
-		this.metodo = metodo;
-		setRegiaoParametros();
+	public ExtratorParametro(String metodo) {
+		super(metodo);		
+		
+		setRegiaoParametros();	
 		
 		if (temParametro()){
 			setListaParametro();
@@ -47,15 +46,12 @@ public class ExtratorParametroMetodo {
 		}			
 	}
 
-	private void setRegiaoParametros() {
-		String metodoSemQuebraDeLinha = metodo.replaceAll("\\n", " ").toLowerCase();
-		regiaoDeclaracaoMetodo = metodoSemQuebraDeLinha.substring(0, metodoSemQuebraDeLinha.indexOf(" is ")).trim();
-		
+	private void setRegiaoParametros() {		
 		if (temParametro())
 			regiaoParametros = regiaoDeclaracaoMetodo
 					.substring(regiaoDeclaracaoMetodo.indexOf("(") + 1, regiaoDeclaracaoMetodo.indexOf(")")).trim();
 	}
-	
+
 	public boolean temParametro() {
 		return regiaoDeclaracaoMetodo.contains("(") && regiaoDeclaracaoMetodo.contains(")");		
 	}
@@ -88,14 +84,27 @@ public class ExtratorParametroMetodo {
 	private void extraiModoEType(String parametro, String nomeParametroAtual) {
 		parametro = convertEspacosParaVirgula(parametro);
 		parametro = unificaInOutNocopyOuInsereIn(parametro);
-		String parametroSemNome = removeValorAntesDaVirgula(parametro); 		
-		modo.put(nomeParametroAtual, parametroSemNome.substring(0,parametroSemNome.indexOf(",")));
+		String parametroSemNome = removeValorAntesDaVirgula(parametro); 	
 		
-		String parametroSemNomeEModo = removeValorAntesDaVirgula(parametroSemNome); 
-		parametroSemNomeEModo = removeDefault(parametroSemNomeEModo);
-		parametroType.put(nomeParametroAtual, parametroSemNomeEModo);		
+		extraiModo(nomeParametroAtual, parametroSemNome);		
+		extraiType(nomeParametroAtual, parametroSemNome);	
 	}
 
+	private void extraiType(String nomeParametroAtual, String parametroSemNome) {
+		String parametroSemNomeEModo = removeValorAntesDaVirgula(parametroSemNome); 
+		parametroSemNomeEModo = removeDefault(parametroSemNomeEModo);
+		parametroType.put(nomeParametroAtual, parametroSemNomeEModo);	
+	}
+
+	private void extraiModo(String nomeParametroAtual,String parametroSemNome) {
+		parametroSemNome = separaInOutNocopyOuInsereIn(parametroSemNome);
+		modo.put(nomeParametroAtual, parametroSemNome.substring(0,parametroSemNome.indexOf(",")));
+	}
+
+	private String separaInOutNocopyOuInsereIn(String parametro) {
+		return parametro.replace("inoutnocopy", "in out nocopy").replace("inout", "in out");
+    }
+	
 	private String removeDefault(String parametroSemNomeEModo) {
 		if(parametroSemNomeEModo.contains(","))
 			return parametroSemNomeEModo.substring(0, parametroSemNomeEModo.indexOf(","));

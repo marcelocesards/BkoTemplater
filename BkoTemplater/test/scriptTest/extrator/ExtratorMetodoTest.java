@@ -1,15 +1,15 @@
-package scriptTest;
+package scriptTest.extrator;
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import script.ExtratorParametroMetodo;
+import script.extrator.ExtratorParametro;
 
 public class ExtratorMetodoTest {
-	ExtratorParametroMetodo extrator;
-	ExtratorParametroMetodo extratorSemParamtro;
+	ExtratorParametro extrator;
+	ExtratorParametro extratorSemParamtro;
 	
 	@Before
 	public void inicializa(){
@@ -25,7 +25,7 @@ public class ExtratorMetodoTest {
 		 		  + "return v_count;"
 		 		  + "END validar;";
 		
-		extrator = new ExtratorParametroMetodo(metodo);
+		extrator = new ExtratorParametro(metodo);
 		
 		String metodoSemParametro = 
 		 		  "FUNCTION validar return varchar2 is\n"
@@ -35,7 +35,7 @@ public class ExtratorMetodoTest {
 		 		  + "return v_count;"
 		 		  + "END validar;";
 		
-		extratorSemParamtro = new ExtratorParametroMetodo(metodoSemParametro);
+		extratorSemParamtro = new ExtratorParametro(metodoSemParametro);
 	}
 	
 	@Test
@@ -58,7 +58,7 @@ public class ExtratorMetodoTest {
 		assertEquals("in", extrator.getMapModo().get("descricao"));
 		assertEquals("in", extrator.getMapModo().get("cliente"));
 		assertEquals("out", extrator.getMapModo().get("numero_cliente"));
-		assertEquals("inout", extrator.getMapModo().get("tipo_cliente"));
+		assertEquals("in out", extrator.getMapModo().get("tipo_cliente"));
 	}
 	
 	@Test

@@ -45,11 +45,11 @@ public class FuncaoCompleaTest {
 	@Test
 	public void getChamadaMetodo(){
 		assertEquals(
-				  "        validar(\n"
-				+ "          nome_cliente => v_bko.nome_cliente,\n"
-				+ "          saldo_cliente => v_bko.saldo_cliente,\n"
-				+ "          saldo_cliente => v_bko.saldo_cliente,\n"
-				+ "          saldo_cliente => v_bko.saldo_cliente);", metodo.getChamadaMetodo());
+				  "validar(\n"
+				+ "nome_cliente => v_bko.nome_cliente,\n"
+				+ "saldo_cliente => v_bko.saldo_cliente,\n"
+				+ "saldo_cliente => v_bko.saldo_cliente,\n"
+				+ "saldo_cliente => v_bko.saldo_cliente);", metodo.getChamadaMetodo());
 	}
 	
 	@Test
