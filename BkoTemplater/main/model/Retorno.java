@@ -1,6 +1,6 @@
 package model;
 
-public class Retorno {
+public class Retorno {	
 	private String nome;
 	private String dataType;
 	
