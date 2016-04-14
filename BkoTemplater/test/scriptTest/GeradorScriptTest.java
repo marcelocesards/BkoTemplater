@@ -11,9 +11,9 @@ import org.junit.Test;
 import model.Metodo;
 import model.Parametro;
 import script.MetodoCriado;
-import script.GeradorScript;
 import script.Script;
 import script.ScriptTratamento;
+import script.geradorDeCodigo.GeradorScript;
 
 public class GeradorScriptTest {
 	Script script; 

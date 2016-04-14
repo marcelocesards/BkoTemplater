@@ -3,6 +3,7 @@ package script;
 import java.util.List;
 
 import model.Metodo;
+import script.geradorDeCodigo.Gerador;
 
 public interface Script {
 	public void gerarScript();

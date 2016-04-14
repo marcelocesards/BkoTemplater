@@ -5,6 +5,7 @@ import java.util.List;
 
 import factory.TemplateFactory;
 import model.Metodo;
+import script.geradorDeCodigo.Gerador;
 
 public class ScriptTratamento implements Script{
 	String caminhoArquivo;

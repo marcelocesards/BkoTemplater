@@ -1,6 +1,7 @@
-package script;
+package script.geradorDeCodigo;
 
 import model.Metodo;
+import script.Script;
 
 public class GeradorScript implements Gerador {
 	private Script script;
