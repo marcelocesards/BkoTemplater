@@ -6,26 +6,25 @@ import java.util.List;
 import factory.ParametroFactory;
 import model.Metodo;
 import model.Parametro;
+import model.Retorno;
 import script.extrator.Extrator;
 import script.extrator.ExtratorParametro;
 
 public class MetodoCompletoInserido implements Metodo {
-	private String textoFuncao;
+	private String texto;
 	private String nome;
 	private List<Parametro> parametros;
-	private String body;
-	private Parametro retorno;
-	private String tipoMetodo;
+	private Retorno retorno;
+	private ExtratorParametro extratorParametros;
 
-	public MetodoCompletoInserido(String textoFuncao) {
+	public MetodoCompletoInserido(String textoMetodo) {
 		this.parametros = new ArrayList<>();
-		this.textoFuncao = textoFuncao;
+		this.texto = textoMetodo;		
 		extraiMetodo();
 
 	}
 
 	private void extraiMetodo() {
-		setTipoMetodo();
 		extraiNomeMetodo();
 		extraiListaParametros();
 		extraiRetorno();
@@ -36,17 +35,8 @@ public class MetodoCompletoInserido implements Metodo {
 	}
 
 	private void extraiNomeMetodo() {
-		Extrator extrator = new Extrator(textoFuncao);
+		Extrator extrator = new Extrator(this.texto);
 		this.nome = extrator.getNomeMetodo();
-	}
-
-	private void setTipoMetodo() {
-		if (this.textoFuncao.contains("procedure")) {
-			this.tipoMetodo = "PROCEDURE";
-		} else {
-			this.tipoMetodo = "FUNCTION";
-		}
-
 	}
 
 	@Override
@@ -57,7 +47,7 @@ public class MetodoCompletoInserido implements Metodo {
 
 	@Override
 	public String getMetodoToString() {
-		return textoFuncao;
+		return this.texto;
 	}
 
 	@Override
@@ -65,9 +55,9 @@ public class MetodoCompletoInserido implements Metodo {
 		StringBuilder parametrosTexto = new StringBuilder();
 		int quantidadeParametro = 0;
 
-		//parametrosTexto.append(getRetornoChamada());
-
-		parametrosTexto.append(getNome() + "(\n");
+		parametrosTexto.append(getRetornoChamada());
+		
+		parametrosTexto.append(getNome() + "(");
 
 		for (Parametro parametro : parametros) {
 			quantidadeParametro++;
@@ -82,7 +72,7 @@ public class MetodoCompletoInserido implements Metodo {
 	}
 	
 	private String getRetornoChamada() {
-			return this.retorno.getNome().isEmpty() ? "" : "v_bko." + retorno.getNome() + " := ";		
+			return "";//this.retorno.getNome().isEmpty() ? "" : "v_bko." + retorno.getNome() + " := ";		
 	}
 
 	@Override
@@ -103,12 +93,12 @@ public class MetodoCompletoInserido implements Metodo {
 	}
 
 	private void extraiListaParametros() {
-		ExtratorParametro extratorParametros = new ExtratorParametro(textoFuncao);
-
-		if (extratorParametros.temParametro())
+		this.extratorParametros = new ExtratorParametro(this.texto);
+		if (!extratorParametros.temParametro())
 			return;
 
 		for (String nome : extratorParametros.getListNome()) {
+			
 			parametros.add(new ParametroFactory().getParametro(nome, extratorParametros.getMapModo().get(nome),
 					extratorParametros.getParametroType().get(nome), 0,
 					extratorParametros.getValorDefault().get(nome)));
