@@ -1,26 +1,21 @@
 package script.extrator;
 
-public class ExtratorRetorno extends Extrator{
-
+public class ExtratorRetorno extends Extrator {
 	public ExtratorRetorno(String metodo) {
 		super(metodo);
-		// TODO Auto-generated constructor stub
 	}
 
-	public Object geNome() {
-		// TODO Auto-generated method stub
-		return null;
+	public String getNome() {	
+			return getNomeMetodo() + "_return";
 	}
-
-	public Object temRetorno() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public boolean temRetorno() {
+		return regiaoDeclaracaoMetodo.contains(" return ");
 	}
 
 	public Object getType() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 
 }

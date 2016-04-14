@@ -1,13 +1,12 @@
 package script;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import factory.ParametroFactory;
 import model.Metodo;
 import model.Parametro;
+import script.extrator.Extrator;
 import script.extrator.ExtratorParametro;
 
 public class MetodoCompletoInserido implements Metodo {
@@ -17,8 +16,6 @@ public class MetodoCompletoInserido implements Metodo {
 	private String body;
 	private Parametro retorno;
 	private String tipoMetodo;
-	private int indiceInicioParametros;
-	private int indiceFimParametros;
 
 	public MetodoCompletoInserido(String textoFuncao) {
 		this.parametros = new ArrayList<>();
@@ -29,7 +26,6 @@ public class MetodoCompletoInserido implements Metodo {
 
 	private void extraiMetodo() {
 		setTipoMetodo();
-		extraiIndices();
 		extraiNomeMetodo();
 		extraiListaParametros();
 		extraiRetorno();
@@ -39,13 +35,9 @@ public class MetodoCompletoInserido implements Metodo {
 		
 	}
 
-	private void extraiIndices() {
-		indiceInicioParametros = textoFuncao.indexOf("(") + 1;
-		indiceFimParametros = textoFuncao.indexOf(")") - 1;
-	}
-
 	private void extraiNomeMetodo() {
-		this.nome = textoFuncao.substring(textoFuncao.indexOf(" "), indiceInicioParametros - 1).trim();
+		Extrator extrator = new Extrator(textoFuncao);
+		this.nome = extrator.getNomeMetodo();
 	}
 
 	private void setTipoMetodo() {
