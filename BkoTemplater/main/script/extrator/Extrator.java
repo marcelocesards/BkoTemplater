@@ -14,10 +14,14 @@ public class Extrator {
 	}
 	
 	private void setRegiaoDeclaracao() {
-		String metodoSemQuebraDeLinha = metodo.replaceAll("\\n", " ").toLowerCase();
+		String metodoSemQuebraDeLinha = converteQuebraParaEspaco(metodo.toLowerCase());
 		metodoSemQuebraDeLinha = convertAsToIs(metodoSemQuebraDeLinha);
 		metodoSemQuebraDeLinha = removeEspacosDuplicados(metodoSemQuebraDeLinha);
 		regiaoDeclaracaoMetodo = metodoSemQuebraDeLinha.substring(0, metodoSemQuebraDeLinha.indexOf(" is ")).trim();	
+	}
+	
+	private String converteQuebraParaEspaco(String metodoComQuebraEEspacos){
+		return metodoComQuebraEEspacos.replaceAll("\\n", " ");
 	}
 	
 	private String removeEspacosDuplicados(String metodoSemQuebraDeLinha) {		

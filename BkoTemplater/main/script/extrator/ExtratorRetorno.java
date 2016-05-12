@@ -5,17 +5,20 @@ public class ExtratorRetorno extends Extrator {
 		super(metodo);
 	}
 
-	public String getNome() {	
-			return getNomeMetodo() + "_return";
+	public String getNome() {
+		return getSubstringMaxLength30(getNomeMetodo() + "_return");
 	}
-	
+
+	private String getSubstringMaxLength30(String string) {
+		return string.length() <= 30 ? string : string.substring(0, 30);
+	}
+
 	public boolean temRetorno() {
 		return regiaoDeclaracaoMetodo.contains(" return ");
 	}
 
-	public Object getType() {
-		// TODO Auto-generated method stub
-		return null;
+	public String getType() {
+		return regiaoDeclaracaoMetodo.substring(regiaoDeclaracaoMetodo.indexOf(" return ") + 8);
 	}
 
 }
